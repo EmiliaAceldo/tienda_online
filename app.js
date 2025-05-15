@@ -4,7 +4,7 @@ const contenedorCategorias = document.getElementById("categorias");
 
 let productos = [];
 let categoriaSeleccionada = "all";
-
+//prueba
 async function cargarProductos() {
   try {
     const respuesta = await fetch("https://fakestoreapi.com/products");
