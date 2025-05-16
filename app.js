@@ -4,6 +4,52 @@ const contenedorCategorias = document.getElementById("categorias");
 
 let productos = [];
 let categoriaSeleccionada = "all";
+
+// LÓGICA DE LOGIN
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("loginForm");
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const mensaje = document.getElementById("mensaje");
+
+      try {
+        const response = await fetch("https://fakestoreapi.com/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }), // ← aquí era } y debe ser ,
+        });
+
+        if (!response.ok) {
+          throw new Error("Error en la respuesta de la API");
+        }
+
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        mensaje.textContent = "Inicio de sesión exitoso";
+        mensaje.classList.add("text-green-500");
+
+        setTimeout(() => {
+          window.location.href = "index.html"; // Redirigir a la página principal después de 1.5 segundos
+        }, 1500);
+      } catch (error) {
+        console.error("Error al iniciar sesión:", error);
+        mensaje.textContent = "Error al iniciar sesión. Inténtalo de nuevo.";
+        mensaje.classList.add("text-red-500");
+      }
+    });
+  }
+});
+
 async function cargarProductos() {
   try {
     const respuesta = await fetch("https://fakestoreapi.com/products");
