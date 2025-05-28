@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle del Producto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body
+    class="bg-gray-50 text-gray-800 min-h-screen flex flex-col items-center justify-center p-6"
+  >
+    <div
+      id="detalleProducto"
+      class="bg-white rounded shadow-md p-6 max-w-xl w-full"
+    >
+      <!-- Aquí se mostrará el detalle del producto -->
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const params = new URLSearchParams(location.search);
+        const id = params.get("id");
+        const contenedor = document.getElementById("detalleProducto");
+
+        if (!id) {
+          contenedor.innerHTML = "<p class='text-red-500'>ID no válido.</p>";
+          return;
+        }
+
+        try {
+          const respuesta = await fetch(
+            `https://fakestoreapi.com/products/${id}`
+          );
+          if (!respuesta.ok) throw new Error("Producto no encontrado");
+
+          const producto = await respuesta.json();
+
+          contenedor.innerHTML = `
+            <img src="${producto.image}" alt="${producto.title}" class="w-40 h-40 mx-auto object-contain mb-4">
+            <h2 class="text-2xl font-bold text-center text-blue-600 mb-2">${producto.title}</h2>
+            <p class="text-center text-gray-500 mb-4">${producto.category}</p>
+            <p class="text-center text-xl font-semibold text-green-600 mb-4">$${producto.price}</p>
+            <p class="text-justify text-gray-700 mb-6">${producto.description}</p>
+            <div class="text-center">
+              <a href="index.html" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Volver al Catálogo</a>
+            </div>
+          `;
+        } catch (error) {
+          contenedor.innerHTML =
+            "<p class='text-red-500'>Error al cargar el producto.</p>";
+          console.error(error);
+        }
+      });
+    </script>
+  </body>
+</html>

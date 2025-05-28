@@ -5,7 +5,7 @@ const contenedorCategorias = document.getElementById("categorias");
 let productos = [];
 let categoriaSeleccionada = "all";
 
-// LÓGICA DE LOGIN
+//LOGICA DE LOGIN
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
 
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify({
             username,
             password,
-          }), // ← aquí era } y debe ser ,
+          }), // <-- aquí era ; y debe ser }
         });
 
         if (!response.ok) {
@@ -48,8 +48,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  if (contedorProductos && inputBusqueda && contenedorCategorias) {
+    // Cargar productos y categorías al cargar la página
+    cargarProductos();
+    cargarCategorias();
+
+    // Agregar evento de búsqueda
+    inputBusqueda.addEventListener("input", filtrarProductos);
+  }
+
+  const logoutBtn = document.getElementById("logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    });
+  }
 });
 
+//LOGICA DE PRODUCTOS
 async function cargarProductos() {
   try {
     const respuesta = await fetch("https://fakestoreapi.com/products");
@@ -117,9 +135,8 @@ function mostrarCategorias(categorias) {
     btn.className = `px-4 py-2 rounded-full ${
       categoriaSeleccionada === cat
         ? "bg-blue-500 text-white"
-        : "bg-blue-100 text-blue -500"
-    }
-     hover:bg-blue-500 hover:text-white transition-colors duration-300`;
+        : "bg-blue-100 text-blue-500"
+    } font-semibold shadow transition hover:bg-blue-200`;
 
     btn.addEventListener("click", () => {
       categoriaSeleccionada = cat;
@@ -136,22 +153,16 @@ function mostrarProductos(pepito) {
   pepito.forEach((producto) => {
     const productoDiv = document.createElement("div");
     productoDiv.className =
-      "bg-white rounded-lg shadow-md p-4 flex flex-col items-center hover:shadow-ld transition-shadow duration-300";
+      "bg-white rounded-lg shadow-md p-4 flex flex-col items-center hover:shadow-xl transition-shadow duration-300";
 
     productoDiv.innerHTML = `
-        <img src="${producto.image}" alt="${producto.title}" class="w-32 h-32 object-contain mb-4">
-        <h3 class="text-lg font-semibold mb-2 text-center">${producto.title}</h3>
+      
+      <h3 class="text-lg font-semibold mb-2 text-center">${producto.title}</h3>
+      <img src="${producto.image}" alt="${producto.title}" class="w-32 h-32 object-contain mb-4">
       <p class="text-gray-600 mb-2">$${producto.price}</p>
-      <button class="mt-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Agregar al carrito</button>
-      `;
+      <a href="detalle.html?id=${producto.id}" class="mt-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-center">Ver detalle</a>
+    `;
 
     contedorProductos.appendChild(productoDiv);
   });
 }
-
-inputBusqueda.addEventListener("input", filtrarProductos);
-
-document.addEventListener("DOMContentLoaded", () => {
-  cargarProductos();
-  cargarCategorias();
-});

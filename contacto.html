@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto - Tienda Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Estilo para el contenedor del mapa */
+      #map {
+        height: 500px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <header class="bg-white shadow sticky top-0 z-10">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-blue-600">Tienda Online</h1>
+        <nav class="hidden md:flex gap-6 text-gray-600 font-medium text-sm md:text-base">
+          <a href="index.html" class="hover:text-blue-500">Inicio</a>
+          <a href="contacto.html" class="hover:text-blue-500">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="flex-1 max-w-7xl mx-auto px-6 py-12">
+      <h2 class="text-4xl font-bold text-center text-gray-800 mb-6">Nuestra Ubicación</h2>
+      <p class="text-center text-gray-500 mb-8">
+        Encuentra nuestra tienda principal en el mapa a continuación.
+      </p>
+      <div id="map"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-6 mt-auto">
+      <div class="max-w-7xl mx-auto px-6 text-center text-gray-400 text-sm">
+        &copy; 2025 Tienda Online. Todos los derechos reservados.
+      </div>
+    </footer>
+
+    <!-- Script de Google Maps -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyRJDboEXK4mkwV8q7IyJ0VhdW6vxBltU"
+      async
+      defer
+    ></script>
+    <script>
+      function initMap() {
+        // Coordenadas de Quito, Ecuador
+        const ubicacion = { lat: -0.180653, lng: -78.467834 };
+
+        // Crear el mapa centrado en la ubicación
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 15,
+          center: ubicacion,
+        });
+
+        // Agregar un marcador con un mensaje
+        const marker = new google.maps.Marker({
+          position: ubicacion,
+          map: map,
+          title: "Tienda Principal",
+        });
+
+        // Agregar un cuadro de información al marcador
+        const infoWindow = new google.maps.InfoWindow({
+          content: "<p><strong>Tienda Principal</strong><br>Quito, Ecuador</p>",
+        });
+
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
+        });
+      }
+    </script>
+  </body>
+</html>

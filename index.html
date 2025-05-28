@@ -30,7 +30,15 @@
         >
           <a href="#" class="hover:text-blue-500">Inicio</a>
           <a href="#" class="hover:text-blue-500">Productos</a>
-          <a href="#" class="hover:text-blue-500">Contacto</a>
+          <a href="contacto.html" class="hover:text-blue-500">Contacto</a>
+
+          <button
+            id="logout"
+            class="hover:text-red-500 ml-4"
+            title="Cerrar sesión"
+          >
+            Cerrar sesión
+          </button>
         </nav>
       </div>
     </header>
@@ -70,6 +78,7 @@
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
       >
         <!-- Productos se cargarán aquí dinámicamente -->
+        <a href="detalle.html?id=${producto.id}" class="mt-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-center">Ver detalle</a>
       </div>
     </main>
 
@@ -79,6 +88,12 @@
         &copy; 2025 Tienda Online. Todos los derechos reservados.
       </div>
     </footer>
+
+    <script>
+      if (!localStorage.getItem("token")) {
+        window.location.href = "login.html";
+      }
+    </script>
 
     <script src="app.js"></script>
   </body>
