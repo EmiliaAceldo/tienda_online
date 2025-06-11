@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //LOGICA DE PRODUCTOS
 async function cargarProductos() {
   try {
-    const respuesta = await fetch("https://fakestoreapi.com/products");
+    const respuesta = await fetch("http://127.0.0.1:8000/api/productos");
 
     if (!respuesta.ok) {
       throw new Error("Error en la respuesta de la API");
@@ -146,7 +146,6 @@ function mostrarCategorias(categorias) {
     contenedorCategorias.appendChild(btn);
   });
 }
-
 function mostrarProductos(pepito) {
   contedorProductos.innerHTML = ""; // Limpiar el contenedor antes de agregar nuevos productos
 
@@ -157,12 +156,12 @@ function mostrarProductos(pepito) {
 
     productoDiv.innerHTML = `
       
-      <h3 class="text-lg font-semibold mb-2 text-center">${producto.title}</h3>
-      <img src="${producto.image}" alt="${producto.title}" class="w-32 h-32 object-contain mb-4">
-      <p class="text-gray-600 mb-2">$${producto.price}</p>
+      <h3 class="text-lg font-semibold mb-2 text-center">${producto.titulo}</h3>
+      <img src="${producto.imagen}" alt="${producto.titulo}" class="w-32 h-32 object-contain mb-4">
+      <p class="text-gray-600 mb-2">$${producto.precio}</p>
       <a href="detalle.html?id=${producto.id}" class="mt-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-center">Ver detalle</a>
     `;
 
     contedorProductos.appendChild(productoDiv);
   });
-}
+} 
