@@ -108,7 +108,7 @@ async function cargarProductos() {
 async function cargarCategorias() {
   try {
     const respuesta = await fetch(
-      "https://fakestoreapi.com/products/categories"
+      "http://127.0.0.1:8000/api/categorias"
     );
 
     if (!respuesta.ok) {

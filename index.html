@@ -13,7 +13,7 @@
       <div
         class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
       >
-        <h1 class="text-3xl font-bold text-blue-600">Tienda Online</h1>
+        <h1 class="text-3xl font-bold text-pink-600">Tienda Online</h1>
 
         <!-- Botón hamburguesa -->
         <button
@@ -28,14 +28,14 @@
         id="menu"
         class="hidden md:flex gap-6 text-gray-600 font-medium text-sm md:text-base"
       >
-        <a href="#" class="hover:text-blue-500">Inicio</a>
-        <a href="#" class="hover:text-blue-500">Productos</a>
-        <a href="contacto.html" class="hover:text-blue-500">Contacto</a>
+        <a href="#" class="hover:text-pink-500">Inicio</a>
+        <a href="#" class="hover:text-pink-500">Productos</a>
+        <a href="contacto.html" class="hover:text-pink-500">Contacto</a>
         <!-- Botón de iniciar sesión -->
         <a
           href="login.html"
           id="login-btn"
-          class="hover:text-blue-500 ml-4"
+          class="hover:text-pink-500 ml-4"
           title="Iniciar sesión"
         >
          Iniciar sesión
@@ -71,7 +71,7 @@
           id="busqueda"
           type="text"
           placeholder="Buscar productos..."
-          class="w-full max-w-md px-4 py-2 border-2 border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+          class="w-full max-w-md px-4 py-2 border-2 border-pink-400 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-300"
         />
 
         <!-- Botones de categorías -->
@@ -88,7 +88,9 @@
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
       >
         <!-- Productos se cargarán aquí dinámicamente -->
-        <a href="detalle.html?id=${producto.id}" class="mt-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-center">Ver detalle</a>
+        <a href="detalle.html?id=${producto.id}" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded">
+          Ver detalle
+        </a>
       </div>
     </main>
 
